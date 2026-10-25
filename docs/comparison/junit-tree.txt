@@ -1,0 +1,3 @@
+demo:comparison:jar:1
+\- junit:junit:jar:4.13.2:compile
+   \- org.hamcrest:hamcrest-core:jar:1.3:compile

@@ -92,3 +92,24 @@ PYTHONPATH=src .venv/bin/python scripts/check_quality.py
 лучшую достигнутую глубину: узел, найденный по более короткому пути,
 расширяется снова. Циклические рёбра сохраняются, обход завершается.
 Порядок рёбер соответствует порядку зависимостей в исходном файле.
+
+4. На этом этапе CLI выводит порядок загрузки: зависимости раньше
+   потребителей. Для цикла возвращается ошибка с замкнутым путём.
+   `scripts/demo_graphs.sh` демонстрирует все тестовые конфигурации.
+   Сравнение с настоящим Maven сохранено в `docs/load-order.md`.
+
+## Проверка штатным Maven
+
+Maven не требуется приложению. Только независимый проверочный скрипт
+вызывает официальный maven-dependency-plugin 3.8.1. Нужны Maven и JDK:
+
+```sh
+PYTHONPATH=src .venv/bin/python scripts/compare_maven.py examples/maven.yaml
+```
+
+Если Maven не в PATH, задайте `MVN=/путь/к/mvn`. Скрипт создаёт нейтральный
+consumer-POM в `generated/comparison/`, вызывает `dependency:tree` в
+форматах text/TGF и `dependency:resolve`, сравнивает узлы и рёбра.
+Кеш Maven изолирован в `generated/maven-cache/`. Реальные POM анализатора
+и Maven берутся из Maven Central. Для честного сравнения оставьте
+`max_depth: 10` и пустой фильтр; Maven-скрипт не применяет эти ограничения.

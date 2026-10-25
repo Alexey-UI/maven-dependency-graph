@@ -1,0 +1,8 @@
+Package: junit:junit:4.13.2
+Nodes match Maven: True
+Edges match Maven: True
+DFS load order: org.hamcrest:hamcrest-core:1.3 -> junit:junit:4.13.2
+Maven dependency:resolve (actual output):
+The following files have been resolved:
+   junit:junit:jar:4.13.2:compile -- module junit [auto]
+   org.hamcrest:hamcrest-core:jar:1.3:compile -- module hamcrest.core (auto)

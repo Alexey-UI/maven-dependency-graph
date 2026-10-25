@@ -1,0 +1,6 @@
+2058526846 demo:comparison:jar:1
+1132219173 junit:junit:jar:4.13.2:compile
+1590099678 org.hamcrest:hamcrest-core:jar:1.3:compile
+#
+1132219173 1590099678 compile
+2058526846 1132219173 compile
