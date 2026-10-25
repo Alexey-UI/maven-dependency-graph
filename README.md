@@ -41,3 +41,24 @@ PYTHONPATH=src .venv/bin/python scripts/demo_config_errors.py
 
 1. YAML-конфигурация: вывод восьми параметров в виде `ключ=значение`,
    проверка типов, значений и ошибок чтения; демонстрация всех ошибок.
+
+2. Получение прямых зависимостей Maven из POM заданной версии.
+   Временный вывод настроек этапа 1 заменён списком зависимостей.
+
+## Интерпретация Maven POM
+
+Модуль `maven.py` получает POM через `urllib`, `pom.py` разбирает XML
+через `xml.etree.ElementTree`. Поддержаны пространства имён, родительские
+POM, свойства `${...}`, наследование зависимостей, dependencyManagement
+и импорт BOM. Модели кешируются на время запуска. HTTP-таймаут — 30 с,
+размер POM — до 5 МБ; ошибки HTTP/XML/свойств сообщаются пользователю.
+
+Рассматривается runtime-граф: scope compile/runtime без optional.
+Test/provided/system не распространяются потребителю и пропускаются.
+Профили, SNAPSHOT metadata, диапазоны версий и разрешение конфликтов
+nearest-wins не реализованы. Exclusions, classifier и зависимости
+не-JAR в анализируемом графе вызывают явную ошибку. Это учебный анализатор,
+не полная реализация effective POM Maven.
+
+Правила scope и mediation сверены с
+[документацией Maven](https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html).
