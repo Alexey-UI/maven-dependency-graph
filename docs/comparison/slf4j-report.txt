@@ -1,0 +1,7 @@
+Package: org.slf4j:slf4j-api:2.0.16
+Nodes match Maven: True
+Edges match Maven: True
+DFS load order: org.slf4j:slf4j-api:2.0.16
+Maven dependency:resolve (actual output):
+The following files have been resolved:
+   org.slf4j:slf4j-api:jar:2.0.16:compile -- module org.slf4j

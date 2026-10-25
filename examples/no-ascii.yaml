@@ -1,0 +1,8 @@
+package: A
+repository: repositories/diamond.yaml
+test_mode: true
+version: '1'
+output: ../generated/no-ascii.png
+ascii_tree: false
+max_depth: 10
+filter_substring: ''

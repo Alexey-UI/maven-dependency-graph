@@ -1,0 +1,3 @@
+demo:comparison:jar:1
+\- org.apache.commons:commons-text:jar:1.12.0:compile
+   \- org.apache.commons:commons-lang3:jar:3.14.0:compile

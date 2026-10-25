@@ -4,6 +4,7 @@ import ast
 from pathlib import Path
 import subprocess
 import tokenize
+import sys
 
 from radon.complexity import cc_visit
 
@@ -29,9 +30,15 @@ def check_node(node, path):
         count += bool(args.vararg) + bool(args.kwarg)
         assert count <= MAX_ARGUMENTS, f"{path}: {node.name}: аргументы"
     if isinstance(node, ast.Compare):
-        for operand in (node.left, *node.comparators):
-            if isinstance(operand, ast.Constant):
-                assert type(operand.value) not in NUMERIC_TYPES, (
+        check_comparison(node, path)
+
+
+def check_comparison(node, path):
+    """Reject numeric literals anywhere inside comparison operands."""
+    for operand in (node.left, *node.comparators):
+        for part in ast.walk(operand):
+            if isinstance(part, ast.Constant):
+                assert type(part.value) not in NUMERIC_TYPES, (
                     f"{path}:{node.lineno}: число в сравнении")
 
 
@@ -67,6 +74,9 @@ def main():
              for path in (root / folder).rglob("*.py")]
     for path in files:
         check_python(path)
+    subprocess.run([sys.executable, "-m", "pycodestyle",
+                    "--max-line-length=80", "src", "tests", "scripts"],
+                   cwd=root, check=True)
     subprocess.run(["git", "diff", "--check"], cwd=root, check=True)
     print(f"Проверено Python-файлов: {len(files)}; нарушений нет")
 

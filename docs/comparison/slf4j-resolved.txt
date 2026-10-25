@@ -1,0 +1,3 @@
+
+The following files have been resolved:
+   org.slf4j:slf4j-api:jar:2.0.16:compile -- module org.slf4j

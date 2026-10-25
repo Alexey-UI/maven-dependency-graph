@@ -8,7 +8,8 @@ from urllib.parse import urlsplit
 from .yaml_file import load_yaml
 
 MIN_DEPTH = 0
-COORDINATE = r"[A-Za-z0-9_.-]+:[A-Za-z0-9_.-]+"
+COORDINATE = (r"[A-Za-z0-9_][A-Za-z0-9_.-]*:"
+              r"[A-Za-z0-9_][A-Za-z0-9_.-]*")
 VERSION = r"[A-Za-z0-9_][A-Za-z0-9_.+-]*"
 
 
