@@ -1,0 +1,8 @@
+package: A
+repository: repositories/chain.yaml
+test_mode: true
+version: '1'
+output: ../generated/depth-zero.png
+ascii_tree: true
+max_depth: 0
+filter_substring: ''
