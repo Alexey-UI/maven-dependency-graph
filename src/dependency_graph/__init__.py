@@ -1,0 +1,1 @@
+"""Maven dependency graph, practical assignment 2, variant 20."""
